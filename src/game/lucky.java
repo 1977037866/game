@@ -20,7 +20,8 @@ public class lucky {
 		    int userSelection=input.nextInt();
 			switch(userSelection){
 			case 1:
-				//注册				 				 
+				//注册	
+				//允许用户一次注册一个或多个
 				do{
 					System.out.println("[奖客富翁系统>注册]");	
 				    System.out.println("请填写个人注册信息：");				 				 
@@ -47,29 +48,31 @@ public class lucky {
 			case 2:
 				//登录
 				System.out.println("[奖客富翁系统>登录]");
-				int count=0;				 
-				//当用户输入错误且输入次数不大于3时，重复询问
-				while(count<3){
+				int inputTimeCount=0;	
+				String name=null;
+ 				//当用户输入错误且输入次数不大于3时，重复询问
+				do{
 					System.out.print("请输入用户名：");
 				    Scanner login_name=new Scanner(System.in);
 				    String loginName=login_name.next();
 				    System.out.print("请输入密码：");
 			     	Scanner login_pass=new Scanner(System.in);
 				    int loginPass=login_pass.nextInt();
-				    //验证用户输入是否正确			    
-				    for(int i=0;i<regisName.length;i++){
-				        if(loginName.equals(regisName[i]) && loginPass==regisPass[i]){
-					        System.out.println();
-				            System.out.println("欢迎您："+loginName);
-				            break;
-				         }else{
-					        count++;
-					        System.out.println("输入错误，请继续输入！");
-					        continue;
-				         }  
+				    //验证用户输入是否正确	
+				    
+				    if(loginName.equals(regisName[member]) && loginPass==regisPass[member]){
+ 					        name=loginName;				            				           
+				    }else{
+				    	    member++;
+				    }  				    
+				    if(!(name==null))			    	
+				        System.out.println("欢迎您："+name);
+				    else{
+			        	inputTimeCount++;					       					        
+				    	System.out.println("输入错误，请重新输入！");
 				    }
-				}   
-				if(!(count<3)){
+				}while(name==null&&member<regisName.length&&inputTimeCount<3);  
+				if(!(inputTimeCount<3)){
 					System.out.println("Sorry,最多三次输入机会，您已错误输入三次！");
 				}	   					  				    				 									 																			 
 				break;
